@@ -1,5 +1,4 @@
-
-name: Run ChxHost Bot
+name: Run File Host Bot
 
 on:
   push:
@@ -21,10 +20,17 @@ jobs:
     
     - name: Install packages
       run: |
-        pip install python-telegram-bot
-        pip install nest-asyncio
-        pip install aiofiles
+        pip install aiogram
+        pip install aiohttp
+        pip install psutil
+        pip install python-dotenv
     
     - name: Run bot
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        OWNER_ID: ${{ secrets.OWNER_ID }}
+        ADMIN_ID: ${{ secrets.ADMIN_ID }}
+        YOUR_USERNAME: ${{ secrets.YOUR_USERNAME }}
+        UPDATE_CHANNEL: ${{ secrets.UPDATE_CHANNEL }}
       run: |
         python main.py
